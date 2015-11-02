@@ -1,17 +1,19 @@
----
-layout: default
----
+{% include head.html %} {% include navigation.html %}
+{% if page.image.feature %}￼{% if page.image.credit %}
+Image credit: {{ page.image.credit }}
+{% endif %}{% endif %}
+	•	{% for tag in page.tags %}
+	•	{{ tag }}
+	•	{% endfor %} 
+{% if page.link %}
+{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} →
+{% else %}
+{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}
+{% endif %} 
+{% if page.author %} {% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.owner %} {% endif %} {% if author.avatar contains 'http' %} ￼ {% elsif author.avatar %} ￼ {% endif %} By {{ author.name }} {{ page.date | date: "%B %d, %Y" }} {% if page.modified %} {{ page.modified | date: "%B %d, %Y" }}{% endif %} {% if (site.owner.disqus-shortname and page.comments) or site.comments %} Comment{% endif %} {% if page.share %}{% include social-share.html %}{% endif %} {% if page.ads == true %}{% include ad-sidebar.html %}{% endif %} 
+{{ content }} {% if (site.owner.disqus-shortname and page.comments) or site.comments %}
 
-<article class="post">
-  <h1>{{ page.title }}</h1>
-
-  <div class="entry">
-    {{ content }}
-  </div>
-
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
-  </div>
-
-  {% include disqus.html %}
-</article>
+{% include disqus-comments.html %} {% endif %} 
+{% if page.previous %} Previous {% endif %} {% if page.next %} Next {% endif %} 
+{% include footer.html %} 
+{% include scripts.html %} 
