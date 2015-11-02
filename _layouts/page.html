@@ -1,12 +1,8 @@
----
-layout: default
----
-
-<article class="page">
-
-  <h1>{{ page.title }}</h1>
-
-  <div class="entry">
-    {{ content }}
-  </div>
-</article>
+{% include head.html %} {% include navigation.html %}
+{% if page.image.feature %}￼{% if page.image.credit %}
+Photo Credit: {{ page.image.credit }}
+{% endif %}{% endif %}
+{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}
+{{ content }} 
+{% include footer.html %} 
+{% include scripts.html %} 
